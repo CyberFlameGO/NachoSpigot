@@ -1,7 +1,5 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Maps;
 import java.util.Collection;
 import java.util.Iterator;
@@ -15,8 +13,6 @@ import java.util.ArrayList;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import dev.cobblesword.nachospigot.commons.Constants;
-import dev.cobblesword.nachospigot.knockback.Knockback;
-import dev.cobblesword.nachospigot.knockback.KnockbackConfig;
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Vehicle;
@@ -25,8 +21,6 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 // CraftBukkit end
-
-import co.aikar.timings.SpigotTimings; // Spigot
 
 // PaperSpigot start
 import org.bukkit.Bukkit;
@@ -902,16 +896,18 @@ public abstract class EntityLiving extends Entity {
         if (this.random.nextDouble() >= this.getAttributeInstance(GenericAttributes.c).getValue()) {
             this.ai = true;
             float magnitude  = MathHelper.sqrt(d0 * d0 + d1 * d1);
+            float f1 = MathHelper.sqrt(d0 * d0 + d1 * d1);
+            float f2 = 0.4F;
 
-            final KnockbackConfig config = Knockback.get().getConfig();
-            this.motX /= config.knockbackFriction;
-            this.motY /= config.knockbackFriction;
-            this.motZ /= config.knockbackFriction;
-            this.motX -= d0 / (double) magnitude * config.knockbackHorizontal;
-            this.motY += config.knockbackVertical;
-            this.motZ -= d1 / (double) magnitude * config.knockbackHorizontal;
-            if (this.motY > config.knockbackVerticalLimit) {
-                this.motY = config.knockbackVerticalLimit;
+
+            this.motX /= 2.0D;
+            this.motY /= 2.0D;
+            this.motZ /= 2.0D;
+            this.motX -= d0 / (double) f1 * (double) f2;
+            this.motY += f2;
+            this.motZ -= d1 / (double) f1 * (double) f2;
+            if (this.motY > 0.4000000059604645D) {
+                this.motY = 0.4000000059604645D;
             }
 
         }
