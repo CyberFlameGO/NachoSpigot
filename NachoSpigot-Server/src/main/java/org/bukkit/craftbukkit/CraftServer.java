@@ -792,42 +792,6 @@ public final class CraftServer implements Server {
         enablePlugins(PluginLoadOrder.POSTWORLD);
     }
 
-    @Override
-    public void reloadKB() {
-
-    }
-
-    @Override
-    public void setKnockbackFriction(double d) {
-
-    }
-
-    @Override
-    public void setKnockbackHorizontal(double d) {
-
-    }
-
-    @Override
-    public void setKnockbackVertical(double d) {
-
-    }
-
-    @Override
-    public void setKnockbackVerticalLimit(double d) {
-
-    }
-
-    @Override
-    public void setKnockbackExtraHorizontal(double d) {
-
-    }
-
-    @Override
-    public void setKnockbackExtraVertical(double d) {
-
-    }
-
-
     private void loadIcon() {
         icon = new CraftIconCache(null);
         try {
